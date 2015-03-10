@@ -1,0 +1,63 @@
+Main Features:
+  Main page:
+    Nav Bar:
+     ☐ Create New schedule date
+     ☐ Create New Volunteer
+     ☐ Create New Substitute
+     ☐ View Dates By Month
+     ☐ View All Volunteers
+     ☐ View Substitutes
+    Calendar:
+     ☐ Accordion featuring all scheduled dates in the current month
+     ☐ Each Date contains info on the people scheduled per category
+     ☐ When a person is clicked a modal opens asking if a sub is needed
+     ☐ A list possible subs populates; when one is clicked, a second modal opens with two buttons to send an email request to that person, or replace the currently selected person with that substitute
+     ☐ The month is displayed at the top and the calendar window only shows dates within the selected month
+    Create New Date:
+     ☐ a modal that contains a form
+     ☐ The form contains a date selector, and populates the categories with lists of available volunteers for each category with checkboxes
+     ☐ When the form is submitted a new scheduled date is created with the selected volunteers populated into their respected categories
+     ☐ Ability to save a template to use for later dates. 
+           ☐  Possibly have the modal begin by asking create new or use template 
+    Create New Volunteer/Sub:
+     ☐ A form to create a new volunteer/substitute
+     ☐ On submission the created volunteer/sub is populated into the appropriate database
+    View All Vol/Sub:
+     ☐ View a list of all Vol/Sub in the database with all of their relevant information
+     ☐ Offer the ability to update/change information or delete a volunteer
+     ☐ When their email is clicked a modal pops up to send an email to that person
+  Splash Page:
+    ☐ Nav Bar, info about using the tool
+    ☐ Login button sends user to Main Page
+    ☐ Get Started sends user to Create Account page
+  Create Account Page:
+    ☐ Create username/password
+          ☐  Oauth instead??
+    ☐ Provide a link to the company google calendar
+    ☐ Enter Info for volunteers
+    ☐ Email/contact info
+
+API's/technologies:
+  ☐ Mail Gun
+      ☐ Send email to vol/sub within view vol/sub
+      ☐ Send email to possible sub for confirmation
+      ☐ Auto update DOM upon sub confirmation
+      ☐ email reminders and notifications for scheduled vol/sub???
+  ☐ Google API (calendar)
+      ☐ Auto populate a new event on the groups calendar when created
+      ☐ Reminders/notifications?
+      ☐ Auto sync with changes made to events and send auto reminders updates to those people
+  ☐ Passport
+      ☐ Login authentication
+  ☐ Client-side framework?
+  ☐ UI Framework?
+
+
+
+
+
+
+
+
+
+
