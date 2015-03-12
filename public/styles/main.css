@@ -1,0 +1,23 @@
+.nav, .pagination, .carousel, .panel-title, a { 
+    cursor: pointer; 
+}
+.landing-page {
+    background: peachpuff;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+.logins {
+    background: #fff;
+}
+.container.logins {
+    border-radius: 10px;
+    padding-bottom: 8px;
+}
+.col-centered {
+    float: none;
+    margin: auto;
+}
+.signup-form {
+    width: 40%;
+}

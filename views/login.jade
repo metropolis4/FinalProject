@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    .jumbotron.landing-page
+        .container
+            h1.text-center.main-title corbo
+                span.glyphicon.glyphicon-apple
+        .container(ng-controller="signInController").signup-form.col-centered
+            form.form.row(ng-submit="newUser()")
+                .form-group
+                    label(for="username")
+                    input.form-control(type="text", ng-model="user.username", placeholder="username...")
+                .form-group
+                    label(for="email")
+                    input.form-control(type="text", ng-model="user.password", placeholder="password...")
+                .form-group.col-md-5
+                    input.btn.btn-info(type="submit", value="Submit...")
