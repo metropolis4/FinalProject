@@ -14,11 +14,11 @@ block content
                 .navbar-collapse(id="main-nav", collapse="isCollapsed")
                     ul.nav.navbar-nav
                         li
-                            a(ng-click="addEvent()") New Event
+                            a(ng-click="openNewEvent()") New Event
                         li
-                            a New Team Member
+                            a(ng-click="openNewMember()") New Team Member
                         li
-                            a View Team Members
+                            a(ng-click="openViewMembers()") View Team Members
                         li.dropdown(dropdown, on-toggle="toggled(open)")
                             a.dropdown-toggle(data-toggle="dropdown", role="button", dropdown-toggle) View Month
                                 span.caret
@@ -26,7 +26,7 @@ block content
                                 li(ng-repeat="month in months")
                                     a(ng-click="changeMonth()") {{month}}
                         li
-                            a Manage Categories
+                            a(ng-click="openManageCategories()") Manage Categories
     .jumbotron(ng-controller="calendarController")
         h1 {{newMonth}}
         .container(ng-repeat="event in events")
@@ -34,3 +34,6 @@ block content
             .container(ng-repeat="category in event.people")
                 h3 {{category.category}}
                 h4 {{category.name}}
+
+
+//- p {{event.date | date:'longDate'}}

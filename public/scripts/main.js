@@ -19,7 +19,15 @@ corbo.factory('Events', function($resource){
     };
 });
 
-corbo.controller('mainMenuController', ['$scope', 'Events', function($scope, Events){
+corbo.factory('Cat', function($resource){
+    return $resource('/api/category');
+});
+
+corbo.factory('People', function($resource){
+    return $resource('/api/people');
+});
+
+corbo.controller('mainMenuController', ['$scope', 'Events', '$modal', function($scope, Events, $modal){
     // Controlls for the 'View Month' Element
     $scope.months = [];
     var months = Events.allEvents().query(function(){
@@ -47,16 +55,15 @@ corbo.controller('mainMenuController', ['$scope', 'Events', function($scope, Eve
     };
     $scope.isCollapsed = true;
 
-    // // Controll to add a new event
-    // $scope.event = {};
-    // $scope.addEvent = function(){
-    //     console.log(Events.allEvents().query());
-    //     var newEvent = new Events.allEvents().model($scope.event);
-    //     newEvent.$save(function(event){
-    //         event = new Events.allEvents().model(event);
-    //         Events.allEvents().query().push(event);
-    //     });
-    // };
+    $scope.openNewEvent = function(){
+        console.log('CLICKED');
+        var modalInstance = $modal.open({
+            templateUrl: '/newEvent',
+            controller: 'newEventController'
+        });
+    };
+
+
 
 }]);
 
@@ -82,6 +89,46 @@ corbo.controller('calendarController', ['$scope', 'Events', function($scope, Eve
     });
 }]);
 
-corbo.controller('newEventController', ['$scope', 'Events', function($scope, Events){
+corbo.controller('newEventController', ['$scope', 'Events', '$modalInstance', 'Cat', 'People', function($scope, Events, $modalInstance, Cat, People){
+    $scope.cancel = function(){
+        $modalInstance.dismiss('cancel');
+    };
+
+    $scope.categories = [];
+    Cat.query(function(cat){
+        _.map(cat, function(val){
+            $scope.categories.push(val.name);
+        });
+    });
+    var makeEvent = function(){
+        var finalCategory = [],
+            cats          = [],
+            people        = [];
+        Cat.query(function(cat){
+            _.map(cat, function(val){
+                cats.push(val.name);
+            });
+        });
+        People.query(function(person){
+            _.map(person, function(val){
+                
+            })
+        })
+    };
+    // var people = People.query(function(people){
+    //     people.map
+    // })
+    // console.log(People.query())
+
+    // // Controll to add a new event
+    // $scope.event = {};
+    // $scope.addEvent = function(){
+    //     console.log(Events.allEvents().query());
+    //     var newEvent = new Events.allEvents().model($scope.event);
+    //     newEvent.$save(function(event){
+    //         event = new Events.allEvents().model(event);
+    //         Events.allEvents().query().push(event);
+    //     });
+    // };
 }]);
 })();

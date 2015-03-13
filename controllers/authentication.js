@@ -26,22 +26,24 @@ var authenticationController = {
         authFunction(req, res, next);
     },
     processSignup: function(req, res, next){
-        var user = new User({
-            username: req.body.username,
-            password: req.body.password,
-            email: req.body.email
-        });
-        user.save(function(err, user){
-            if(err){
-                var errorMessage = "Error, Please Try Again";
-                if(err.code === 11000){
-                    errorMessage = "User Already Exists.";
-                }
-                req.flash('error', errorMessage);
-                return res.redirect('/auth/signUp');
-            }
-            performLogin(req, res, next, user);
-        });
+        console.log("CONTENT:: ", req.body);
+        res.redirect('index');
+    //     var user = new User({
+    //         username: req.body.username,
+    //         password: req.body.password,
+    //         email: req.body.email
+    //     });
+    //     user.save(function(err, user){
+    //         if(err){
+    //             var errorMessage = "Error, Please Try Again";
+    //             if(err.code === 11000){
+    //                 errorMessage = "User Already Exists.";
+    //             }
+    //             req.flash('error', errorMessage);
+    //             return res.redirect('/auth/signUp');
+    //         }
+    //         performLogin(req, res, next, user);
+    //     });
     },
     logout: function(req, res){
         req.logout();

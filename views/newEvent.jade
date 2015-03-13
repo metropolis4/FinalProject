@@ -1,0 +1,15 @@
+.modal-header
+    h3.modal-title Create an Event
+.modal-body
+    form.form(ng-submit="addEvent()")
+        .form-group
+            datepicker(ng-model="event.date")
+        .form-group(ng-repeat="category in categories")
+            label(for="{{category}}", ng-model="") {{category}}
+            input(type="text")
+            
+        
+.modal-footer
+    button.btn.btn-primary.pull-left(ng-click="template()") save as template...
+    button.btn.btn-info(ng-click="confirm()") save...
+    button.btn.btn-warning(ng-click="cancel()") cancel...

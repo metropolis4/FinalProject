@@ -1,4 +1,7 @@
-var Event = require('../models/events.js');
+var Event  = require('../models/events.js'),
+    People = require('../models/people.js'),
+    Cat    = require('../models/categories.js');
+
 var calendar = require('../public/scripts/calendar.js');
 var _ = require('underscore');
 
@@ -6,6 +9,9 @@ var mainController = {
 	main: function(req, res){
 		res.render('main');
 	},
+    newEventModal: function(req, res){
+        res.render('newEvent');
+    },
     createEvent: function(req, res){
         console.log("REQ FROM SERVER:: ",req.body);
             // var justDates = _.chain(results)
@@ -20,6 +26,16 @@ var mainController = {
     },
     getEvents: function(req, res){
         Event.find({}, function(err, results){
+            res.send(results);
+        });
+    },
+    getCategories: function(req, res){
+        Cat.find({}, function(err, results){
+            res.send(results);
+        });
+    },
+    getPeople: function(req, res){
+        People.find({}, function(err, results){
             res.send(results);
         });
     }
