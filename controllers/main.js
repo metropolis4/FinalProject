@@ -7,7 +7,9 @@ var _ = require('underscore');
 
 var mainController = {
 	main: function(req, res){
-		res.render('main');
+		res.render('main', {
+            user: req.user
+        });
 	},
     newEventModal: function(req, res){
         res.render('newEvent');
@@ -33,6 +35,21 @@ var mainController = {
         Cat.find({}, function(err, results){
             res.send(results);
         });
+    },
+    newCategory: function(req, res){
+        var newCat = new Cat(req.body);
+        newCat.save(function(err, results){
+            res.send(results);
+        });
+    },
+    deleteCategory: function(req, res){
+        var toDelete = Cat.findById(req.body.id);
+        Cat.remove(toDelete, function(err, results){
+            res.sendStatus(results);
+        });
+    },
+    manageCategoriesModal: function(req, res){
+        res.render('manageCat');
     },
     getPeople: function(req, res){
         People.find({}, function(err, results){

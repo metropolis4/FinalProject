@@ -1,0 +1,16 @@
+.modal-header
+    h3.modal-title Manage Team Categories
+.modal-body
+    .container
+        ul
+            li.lead(ng-repeat="category in categories") {{category.name}}
+                |   &nbsp;
+                a.btn.btn-warning.btn-xs.glyphicon.glyphicon-remove(ng-click="deleteCategory(category._id)") 
+        
+.modal-footer
+    form.form-inline(ng-submit="addCategoryForm.$valid && addCategory()", name="addCategoryForm", novalidate)
+        .form-group.pull-left
+            input.form-control(type="text", ng-model="category.name", placeholder="new category...", required)
+            | &nbsp;
+            input.btn.btn-info(type="submit", value="Add...")
+    button.btn.btn-default.pull-right(ng-click="cancel()") Close Window

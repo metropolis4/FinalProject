@@ -40,16 +40,23 @@ app.get('/', indexController.index);
 app.get('/login', indexController.login);
 app.post('/auth/login', authenticationController.processLogin);
 app.get('/signup', indexController.signUp);
-app.post('/auth/signup?', authenticationController.processSignup);
+app.post('/auth/signup', authenticationController.processSignup);
 app.get('/auth/logout', authenticationController.logout);
+
 // app.use(passportConfig.ensureAuthenticated);
 
+app.get('/templates/:templateid', function(req, res){
+    res.render('templates/' + req.params.templateid);
+});
 app.get('/main', mainController.main);
 app.get('/api/event', mainController.getEvents);
 app.post('/api/event', mainController.createEvent);
 app.get('/api/category', mainController.getCategories);
+app.post('/api/category', mainController.newCategory);
+app.put('/api/category/:id', mainController.deleteCategory);
 app.get('/api/people', mainController.getPeople);
 app.get('/newEvent', mainController.newEventModal);
+app.get('/manageCategories', mainController.manageCategoriesModal);
 
 var server = app.listen(5960, function() {
 	console.log('Express server listening on port ' + server.address().port);

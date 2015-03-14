@@ -6,7 +6,7 @@ block content
             h1.text-center.main-title corbo
                 span.glyphicon.glyphicon-apple
         .container.signup-form.col-centered
-            form(action="/auth/signup").form.row
+            form(action="/auth/signup", method="POST").form.row
                 .form-group.col-md-10
                     label(for="email")
                     input.form-control(type="text", name="email", placeholder="Email...")

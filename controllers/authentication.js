@@ -4,7 +4,7 @@ var passport = require('passport'),
 var performLogin = function(req, res, next, user){
     req.login(user, function(err){
         if(err) return next(err);
-        return res.redirect('/');
+        return res.redirect('/main');
     });
 };
 
@@ -19,7 +19,7 @@ var authenticationController = {
             if(err) return next(err);
             if(!user) {
                 req.flash('error', 'Login Error. Please Try Again');
-                return res.redirect('/auth/login');
+                return res.redirect('/login');
             }
             performLogin(req, res, next, user);
         });
@@ -27,23 +27,22 @@ var authenticationController = {
     },
     processSignup: function(req, res, next){
         console.log("CONTENT:: ", req.body);
-        res.redirect('index');
-    //     var user = new User({
-    //         username: req.body.username,
-    //         password: req.body.password,
-    //         email: req.body.email
-    //     });
-    //     user.save(function(err, user){
-    //         if(err){
-    //             var errorMessage = "Error, Please Try Again";
-    //             if(err.code === 11000){
-    //                 errorMessage = "User Already Exists.";
-    //             }
-    //             req.flash('error', errorMessage);
-    //             return res.redirect('/auth/signUp');
-    //         }
-    //         performLogin(req, res, next, user);
-    //     });
+        var user = new User({
+            username: req.body.username,
+            password: req.body.password,
+            email: req.body.email
+        });
+        user.save(function(err, user){
+            if(err){
+                var errorMessage = "Error, Please Try Again";
+                if(err.code === 11000){
+                    errorMessage = "User Already Exists.";
+                }
+                req.flash('error', errorMessage);
+                return res.redirect('/auth/signUp');
+            }
+            performLogin(req, res, next, user);
+        });
     },
     logout: function(req, res){
         req.logout();

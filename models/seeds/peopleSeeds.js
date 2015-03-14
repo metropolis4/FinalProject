@@ -4,7 +4,7 @@ People.find({}, function(err, results){
     if(results.length === 0){
         var person1 = new People({
             name: "Matt",
-            roles: [
+            categories: [
                 "Guitar",
                 "Drums"
             ],
@@ -15,7 +15,7 @@ People.find({}, function(err, results){
 
         var person2 = new People({
             name: "Gustave",
-            roles: [
+            categories: [
                 "Saxamaphone",
                 "Ukelele",
                 "Drums"

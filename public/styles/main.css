@@ -13,6 +13,7 @@
 .container.logins {
     border-radius: 10px;
     padding-bottom: 8px;
+    margin-bottom: 10px;
 }
 .col-centered {
     float: none;
@@ -20,4 +21,10 @@
 }
 .signup-form {
     width: 40%;
+}
+.ng-invalid.ng-dirty {
+    border-color: red;
+}
+.ng-valid.ng-dirty {
+    border-color: green;
 }
