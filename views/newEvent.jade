@@ -4,12 +4,12 @@
     form.form(novalidate)
         .form-group
             input(type="date", ng-model="event.date" required)
-        .form-group(ng-repeat="(key, data) in categories")
-            label(for="{{key}}", ng-model="event.people.category") {{key}}
-            .checkbox(ng-repeat="name in data")
+        .form-group(ng-repeat="category in categories")
+            label(ng-model="categories[$index].category") {{categories[$index].category}}
+            .checkbox
                 label
-                    input(type="checkbox", ng-model="event.people.name", value="{{name}}", required) 
-                    {{name}}
+                    {{categories[$index].name}}
+                    input(type="checkbox", ng-model="categories[$index].name", value="{{categories[$index].name}}", required) 
 .modal-footer
     button.btn.btn-primary.pull-left(ng-click="template()") save as template...
     button.btn.btn-info(ng-click="confirm()") save...

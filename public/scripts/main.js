@@ -162,7 +162,8 @@ corbo.controller('newEventController', ['$scope', '$q', 'Events', '$modalInstanc
     var eventObjects = _.pairs(_.object(keys, values));
     eventObjects = _.map(eventObjects, function(val){
         var newObj = {};
-        newObj[val[0]] = val[1];
+        newObj.category = val[0];
+        newObj.name = val[1];
         $scope.categories.push(newObj);
     });
     console.log($scope.categories);
