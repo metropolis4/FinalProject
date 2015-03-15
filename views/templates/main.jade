@@ -20,20 +20,15 @@
                         a.dropdown-toggle(data-toggle="dropdown", role="button", dropdown-toggle) View Month
                             span.caret
                         ul.dropdown-menu(role="menu")
-                            li(ng-repeat="month in months")
-                                a(ng-click="changeMonth()") {{month}}
+                            li(ng-repeat="month in allMonths")
+                                a(ng-click="changeMonth()") {{month | date: 'MMMM'}}
                     li
                         a(ng-click="openManageCategories()") Manage Categories
-                    ul
-                        li(ng-repeat="event in events") {{ event.cat }} : {{event.people}}
 .container
     .jumbotron(ng-controller="calendarController")
-        h1 {{newMonth}}
+        h1 {{newMonth | date: 'MMMM y'}}
         .container(ng-repeat="event in events")
-            p {{event.date[0]}} {{event.date[1]}}, {{event.date[2]}}  
+            p {{event.date | date: 'MMMM d'}} 
             .container(ng-repeat="category in event.people")
                 h3 {{category.category}}
                 h4 {{category.name}}
-
-
-//- p {{event.date | date:'longDate'}}

@@ -7,7 +7,7 @@ var eventSchema = mongoose.Schema({
             category: String
         }
     ],
-    date: [String]
+    date: Date
 });
 
 module.exports = mongoose.model('events', eventSchema);

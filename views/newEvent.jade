@@ -1,9 +1,9 @@
 .modal-header
     h3.modal-title Create an Event
 .modal-body
-    form.form(novalidate)
+    form.form(name="createEvent" novalidate)
         .form-group
-            input(type="date", ng-model="event.date", required)
+            datepicker(ng-model="event.date", required)
         .form-group(ng-repeat="category in categories")
             {{category.category}}
             .radio(ng-repeat="name in category.name")
@@ -13,4 +13,4 @@
 .modal-footer
     button.btn.btn-primary.pull-left(ng-click="template()") save as template...
     button.btn.btn-info(ng-click="confirm()") save...
-    button.btn.btn-default(ng-click="cancel()") cancel...
+    button.btn.btn-default(ng-click="cancel()") close...

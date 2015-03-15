@@ -15,7 +15,25 @@ var mainController = {
         res.render('newEvent');
     },
     createEvent: function(req, res){
-        console.log("REQ FROM SERVER:: ",req.body);
+        var event = req.body;
+        var date = req.body.date;
+        var people = _.chain(event)
+                    .omit(event, 'date')
+                    .pairs()
+                    .map(function(val){
+                        return { name: val[1], category: val[0]}
+                    })
+                    .value();
+        var formattedEvent = {
+            people: people,
+            date: date
+        };
+        console.log("full event:: ",formattedEvent);
+        var newEvent = new Event(formattedEvent);
+        newEvent.save(function(err, results){
+            res.send(results);
+        });
+
             // var justDates = _.chain(results)
             //     .map(function(val){
             //         return val.date;

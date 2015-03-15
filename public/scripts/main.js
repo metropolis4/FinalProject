@@ -74,13 +74,15 @@ corbo.factory('PeopleCat', function ($q, Cat, People) {
     };
 }); 
 
-corbo.controller('mainMenuController', ['$scope', '$q', 'Events', 'Cat', 'PeopleCat', '$modal', function($scope, $q, Events, Cat, PeopleCat, $modal){
+corbo.controller('mainMenuController', ['$scope', '$q', '$filter', 'Events', 'Cat', 'PeopleCat', '$modal', function($scope, $q, $filter, Events, Cat, PeopleCat, $modal){
     // Controlls for the 'View Month' Element
-    $scope.months = [];
-    var months = Events.allEvents().query(function(){
+    $scope.allMonths = [];
+    Events.model.query(function(months){
         _.map(months, function(val){
-            if($scope.months.indexOf(val.date[0]) === -1)
-                $scope.months.push(val.date[0]);
+            var justMonths = $filter('date')(val.date, 'MMMM');
+            if($scope.allMonths.indexOf(justMonths) === -1){
+                $scope.allMonths.push(justMonths);
+            }
         });
     });
     $scope.newMonth = Events.getMonth();
@@ -116,7 +118,7 @@ corbo.controller('mainMenuController', ['$scope', '$q', 'Events', 'Cat', 'People
     };
 }]);
 
-corbo.controller('calendarController', ['$scope', 'Events', function($scope, Events){
+corbo.controller('calendarController', ['$scope', '$filter', 'Events', function($scope, $filter, Events){
     $scope.events = [];
 
     $scope.newMonth = Events.getMonth();
@@ -125,12 +127,10 @@ corbo.controller('calendarController', ['$scope', 'Events', function($scope, Eve
             $scope.newMonth = newVal;
         }
         $scope.events = [];
-        var allEvents = Events.allEvents().query(function(){
-            allEvents.map(function(val){
-                // console.log(val.date[1]);
-                // _.sortBy(val, val.date[1]); 
-                // console.log(val.date)
-                if(val.date[0] === $scope.newMonth) {
+        Events.model.query(function(event){
+            _.map(event, function(val){
+                var justMonth = $filter('date')(val.date, 'MMMM');
+                if(justMonth === $scope.newMonth) {
                     $scope.events.push(val);
                 }
             });
@@ -169,11 +169,11 @@ corbo.controller('newEventController', ['$scope', '$q', 'Events', '$modalInstanc
     $scope.event = {};
     $scope.confirm = function(){
         var newEvent = new Events.model($scope.event);
-        console.log("TEST TEST TEST:: ", newEvent);
         newEvent.$save(function(savedEvent){
             savedEvent = new Events.model(savedEvent);
             Events.items.push(savedEvent);
         });
+        $scope.event = {};
     };
 }]);
 
