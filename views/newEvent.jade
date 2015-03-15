@@ -3,13 +3,13 @@
 .modal-body
     form.form(novalidate)
         .form-group
-            input(type="date", ng-model="event.date" required)
+            input(type="date", ng-model="event.date", required)
         .form-group(ng-repeat="category in categories")
-            label(ng-model="categories[$index].category") {{categories[$index].category}}
-            .checkbox
-                label
-                    {{categories[$index].name}}
-                    input(type="checkbox", ng-model="categories[$index].name", value="{{categories[$index].name}}", required) 
+            {{category.category}}
+            .radio(ng-repeat="name in category.name")
+                label(for="{{category.name[$index]}}")
+                    input(type="radio" value="{{category.name[$index]}}" ng-model="event[category.category]") 
+                    {{category.name[$index]}}
 .modal-footer
     button.btn.btn-primary.pull-left(ng-click="template()") save as template...
     button.btn.btn-info(ng-click="confirm()") save...

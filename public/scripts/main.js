@@ -156,7 +156,6 @@ corbo.controller('newEventController', ['$scope', '$q', 'Events', '$modalInstanc
         });
         values.push(midValue);
     });
-    // $scope.categories = _.object(keys, values);
     
     $scope.categories = [];
     var eventObjects = _.pairs(_.object(keys, values));
@@ -166,11 +165,11 @@ corbo.controller('newEventController', ['$scope', '$q', 'Events', '$modalInstanc
         newObj.name = val[1];
         $scope.categories.push(newObj);
     });
-    console.log($scope.categories);
 
     $scope.event = {};
-    var confirm = function(){
+    $scope.confirm = function(){
         var newEvent = new Events.model($scope.event);
+        console.log("TEST TEST TEST:: ", newEvent);
         newEvent.$save(function(savedEvent){
             savedEvent = new Events.model(savedEvent);
             Events.items.push(savedEvent);

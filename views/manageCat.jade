@@ -3,7 +3,7 @@
 .modal-body
     .container
         ul
-            li.lead(ng-repeat="category in categories") {{category.name}}
+            li.lead(ng-repeat="category in categories") {{::category.name}}
                 |   &nbsp;
                 a.btn.btn-warning.btn-xs.glyphicon.glyphicon-remove(ng-click="deleteCategory(category._id)") 
         
