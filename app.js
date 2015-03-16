@@ -45,6 +45,8 @@ app.get('/templates/:templateid', function(req, res){
 });
 app.get('/main', mainController.main);
 app.get('/api/event', mainController.getEvents);
+app.get('/api/event/:id', mainController.getSingleEvent);
+app.put('/api/event/:id', mainController.updateEvent);
 app.post('/api/event', mainController.createEvent);
 app.get('/api/category', mainController.getCategories);
 app.post('/api/category', mainController.newCategory);

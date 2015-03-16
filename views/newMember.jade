@@ -22,7 +22,7 @@
                 label.lead(for="{{category[$index]}}")
                     input(type="checkbox", value="{{category.name}}", ng-model="newMember[category.name]")
                     | &nbsp;
-                    {{category.name}}
+                    | {{category.name}}
 .modal-footer
     button.btn.btn-info(ng-click="createNewMember.$valid && confirm()") save...
     button.btn.btn-default(ng-click="cancel()") close...

@@ -45,6 +45,19 @@ console.log("FROM SERVER:: ", formattedEvent);
             res.send(results);
         });
     },
+    getSingleEvent: function(req, res){
+        Event.findById(req.params.id, function(err, results){
+            if(err) throw err;
+        console.log(results);
+            res.send(results);
+        });
+    },
+    updateEvent: function(req, res){
+        Event.findByIdAndUpdate(req.params.id, req.body, function(err, results){
+            if(err) throw err;
+            res.send(results);
+        });
+    },
     getCategories: function(req, res){
         Cat.find({}, function(err, results){
             if(err) throw err;

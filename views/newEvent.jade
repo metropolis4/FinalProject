@@ -8,9 +8,12 @@
             label {{category.category}}
             .radio(ng-repeat="name in category.name")
                 label(for="{{category.name[$index]}}")
-                    input(type="radio" value="{{category.name[$index]}}" ng-model="event[category.category]") 
-                    {{category.name[$index].first}}
+                    input(type="radio", value="{{category.name[$index]}}", ng-model="event[category.category]") 
+                    | {{category.name[$index].first}}
 .modal-footer
-    button.btn.btn-primary.pull-left(ng-click="template()") save as template...
-    button.btn.btn-info(ng-click="createEvent.$valid && confirm()") save...
+    .checkbox.pull-left
+        label
+            input(type="checkbox", ng-model="template", ng-true-value="'persisting'", ng-false-value="'resetting'")
+            | Template (data is {{template}})
+    button.btn.btn-info(ng-click="confirm()") save...
     button.btn.btn-default(ng-click="cancel()") close...
