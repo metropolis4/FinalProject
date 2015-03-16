@@ -1,0 +1,13 @@
+accordion(close-others="true")
+    accordion-group(ng-repeat="event in events | orderBy: 'date'" is-open="status.open")
+        accordion-heading {{event.date | date: 'MMMM d'}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
+        .container.row.test-class
+            .container.col-md-3.center-block.cards(ng-repeat="category in event.people")
+                .container
+                    .modal-header 
+                        h3 {{category.category}}
+                    .modal-body
+                        .container
+                            p.lead {{category.name}}
+                    .modal-footer
+                        button.btn.btn-info find a sub...

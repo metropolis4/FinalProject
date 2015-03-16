@@ -65,6 +65,14 @@ console.log("FROM SERVER:: ", formattedEvent);
             res.sendStatus(results);
         });
     },
+    deleteMember: function(req, res){
+        console.log("FROM SERVER::: ", req.body)
+        var toDelete = People.findById(req.body.id);
+        People.remove(toDelete, function(err, results){
+            if(err) throw err;
+            res.sendStatus(results);
+        });
+    },
     manageCategoriesModal: function(req, res){
         res.render('manageCat');
     },

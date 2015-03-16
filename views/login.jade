@@ -7,13 +7,13 @@ block content
                 span.glyphicon.glyphicon-apple
         .container.signup-form.col-centered
             form(action="/auth/login", method="POST").form.row
-                .form-group
+                .form-group.col-md-10
                     label(for="username")
                     input.form-control(type="text", name="username", placeholder="username...")
-                .form-group
+                .form-group.col-md-10
                     label(for="email")
-                    input.form-control(type="text", name="password", placeholder="password...")
-                .form-group.col-md-5
+                    input.form-control(type="password", name="password", placeholder="password...")
+                .form-group.col-md-5.clearfix
                     input.btn.btn-info(type="submit", value="Submit...")
         .container
             if error

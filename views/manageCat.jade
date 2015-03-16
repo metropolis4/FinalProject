@@ -2,10 +2,11 @@
     h3.modal-title Manage Team Categories
 .modal-body
     .container
-        ul
-            li.lead(ng-repeat="category in categories") {{::category.name}}
-                |   &nbsp;
-                a.btn.btn-warning.btn-xs.glyphicon.glyphicon-remove(ng-click="deleteCategory($index, category._id)") 
+        ul.list-unstyled
+            li.lead(ng-repeat="category in categories")
+                a.btn.btn-danger.btn-xs.glyphicon.glyphicon-remove(ng-click="deleteCategory($index, category._id)")
+                | &nbsp;
+                {{::category.name}}
         
 .modal-footer
     form.form-inline(ng-submit="addCategoryForm.$valid && addCategory()", name="addCategoryForm", novalidate)

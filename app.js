@@ -14,10 +14,6 @@ var mainController = require('./controllers/main'),
 
 mongoose.connect('mongodb://localhost/helmer');
 
-// Populate test data. REMOVE FOR PRODUCTION
-require('./models/seeds/catSeeds.js');
-require('./models/seeds/peopleSeeds.js');
-
 var app = express();
 app.set('view engine', 'jade');
 app.set('views', __dirname + '/views');
@@ -59,6 +55,7 @@ app.get('/manageCategories', mainController.manageCategoriesModal);
 app.get('/newMember', mainController.newMember);
 app.get('/viewMembers', mainController.viewMembers);
 app.post('/api/people', mainController.createNewMember);
+app.put('/api/people/:id', mainController.deleteMember);
 
 var server = app.listen(5960, function() {
 	console.log('Express server listening on port ' + server.address().port);

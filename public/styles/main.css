@@ -1,11 +1,11 @@
 .nav, .pagination, .carousel, .panel-title, a { 
     cursor: pointer; 
 }
-.landing-page {
+body {
     background: peachpuff;
-    height: 100%;
-    width: 100%;
-    position: absolute;
+}
+.jumbotron.landing-page {
+    background: peachpuff;
 }
 .logins {
     background: #fff;
@@ -27,4 +27,36 @@
 }
 .ng-valid.ng-dirty {
     border-color: green;
+}
+.cards>.container {
+    border: 1px solid #aaa;
+    border-radius: 5px;
+}
+.navbar {
+    margin-top: 5px;
+}
+.jumbotron {
+    background: #f8f8f8;
+    color: #777777;
+}
+.panel-default>.panel-heading {
+    background: #51c1db;
+    color: #ffffff;
+    border-radius: 5px;
+}
+.panel-default {
+    border-color: #f8f8f8;
+}
+.test-class {
+    padding-left: 5%;
+}
+.modal-header>h3 {
+    margin: 0;
+}
+.modal-header {
+    padding: 12px;
+}
+.form.row {
+    margin-right: -36px;
+    margin-left: 54px;
 }

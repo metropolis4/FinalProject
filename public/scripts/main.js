@@ -42,7 +42,7 @@ corbo.factory('Cat', function($resource){
                                     method: 'DELETE'
                                 } 
                     }
-        });
+    });
     return {
         model: model,
         items: model.query()
@@ -50,7 +50,17 @@ corbo.factory('Cat', function($resource){
 });
 
 corbo.factory('People', function($resource){
-    var model = $resource('/api/people');
+    var model = $resource('/api/people/:id', {}, {
+            show: { method: 'GET' },
+            update: { method: 'PUT', params: {id: '@id'} },
+            delete: { 
+                        method: 'PUT', 
+                        params: {
+                                    id: '@id',
+                                    method: 'DELETE'
+                                } 
+                    }
+    });
     return {
         model: model,
         items: model.query()
@@ -134,6 +144,11 @@ corbo.controller('viewMembersController', ['$scope', '$modalInstance', 'People',
     $scope.members = People.items;
     $scope.cancel = function(){
         $modalInstance.dismiss('cancel');
+    };
+
+    $scope.deletePerson = function(index, selectedId){
+        People.model.delete({id: selectedId});
+        $scope.members.splice(index, 1);
     };
 }]);
 
@@ -236,6 +251,13 @@ corbo.controller('newMemberController', ['$scope', '$modalInstance', 'People', '
         $modalInstance.dismiss('cancel');
     };
 }]);
+
+corbo.directive('calendaraccordion', function(){
+    return {
+        restrict   : 'E',
+        templateUrl: '/templates/calendarAccordion'
+    };
+});
 
 })();
 

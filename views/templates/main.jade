@@ -6,7 +6,7 @@
                     span.icon-bar
                     span.icon-bar
                     span.icon-bar
-                a.navbar-brand Corbo
+                a.navbar-brand(href="/") Corbo
                     span.glyphicon.glyphicon-apple
             .navbar-collapse(id="main-nav", collapse="isCollapsed")
                 ul.nav.navbar-nav
@@ -26,9 +26,5 @@
                         a(ng-click="openManageCategories()") Manage Categories
 .container
     .jumbotron(ng-controller="calendarController")
-        h1 {{newMonth | date: 'MMMM y'}}
-        .container(ng-repeat="event in events | orderBy: 'date'")
-            p {{event.date | date: 'MMMM d'}} 
-            .container(ng-repeat="category in event.people")
-                h3 {{category.category}}
-                h4 {{category.name}}
+        h1.text-center {{newMonth | date: 'MMMM y'}}
+        calendaraccordion
