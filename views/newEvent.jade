@@ -5,12 +5,12 @@
         .form-group
             datepicker(ng-model="event.date", required)
         .form-group(ng-repeat="category in categories")
-            {{category.category}}
+            label {{category.category}}
             .radio(ng-repeat="name in category.name")
                 label(for="{{category.name[$index]}}")
                     input(type="radio" value="{{category.name[$index]}}" ng-model="event[category.category]") 
-                    {{category.name[$index]}}
+                    {{category.name[$index].first}}
 .modal-footer
     button.btn.btn-primary.pull-left(ng-click="template()") save as template...
-    button.btn.btn-info(ng-click="confirm()") save...
+    button.btn.btn-info(ng-click="createEvent.$valid && confirm()") save...
     button.btn.btn-default(ng-click="cancel()") close...

@@ -16,7 +16,6 @@ mongoose.connect('mongodb://localhost/helmer');
 
 // Populate test data. REMOVE FOR PRODUCTION
 require('./models/seeds/catSeeds.js');
-require('./models/seeds/eventSeeds.js');
 require('./models/seeds/peopleSeeds.js');
 
 var app = express();
@@ -57,6 +56,9 @@ app.put('/api/category/:id', mainController.deleteCategory);
 app.get('/api/people', mainController.getPeople);
 app.get('/newEvent', mainController.newEventModal);
 app.get('/manageCategories', mainController.manageCategoriesModal);
+app.get('/newMember', mainController.newMember);
+app.get('/viewMembers', mainController.viewMembers);
+app.post('/api/people', mainController.createNewMember);
 
 var server = app.listen(5960, function() {
 	console.log('Express server listening on port ' + server.address().port);

@@ -1,0 +1,28 @@
+.modal-header
+    h3.modal-title Add A Member To The Team
+.modal-body
+    form.form(name="createNewMember" novalidate)
+        .form-group
+            h4 Name
+            .form-group.col-md-6
+                label(for="name.first") first
+                input.form-control(type="text", ng-model="newMember.name.first", placeholder="Marvin" required)
+            .form-group.col-md-6
+                label(for="name.last") last
+                input.form-control(type="text", ng-model="newMember.name.last", placeholder="Martian" required)
+        .form-group
+            label(for="email") email
+            input.form-control(type="email", ng-model="newMember.email", placeholder="oscarmeyer@weiner.com" required)
+        .form-group
+            label(for="phone") phone
+            input.form-control(type="tel", ng-model="newMember.phone", placeholder="xxx-xxx-xxxx" required)
+        .form-group
+            label(for="categories") Select Categories
+            .radio(ng-repeat="category in categories")
+                label.lead(for="{{category[$index]}}")
+                    input(type="checkbox", value="{{category.name}}", ng-model="newMember[category.name]")
+                    | &nbsp;
+                    {{category.name}}
+.modal-footer
+    button.btn.btn-info(ng-click="createNewMember.$valid && confirm()") save...
+    button.btn.btn-default(ng-click="cancel()") close...

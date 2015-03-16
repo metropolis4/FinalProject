@@ -110,11 +110,30 @@ corbo.controller('mainMenuController', ['$scope', '$q', '$filter', 'Events', 'Ca
             controller: 'newEventController'
         });
     };
+    $scope.openNewMember = function(){
+        var modalInstance = $modal.open({
+            templateUrl: '/newMember',
+            controller: 'newMemberController'
+        });
+    };
     $scope.openManageCategories = function($event){
         var modalInstance = $modal.open({
             templateUrl: '/manageCategories',
             controller: 'manageCategoriesController'
         });
+    };
+    $scope.openViewMembers = function(){
+        var modalInstance = $modal.open({
+            templateUrl: '/viewMembers',
+            controller: 'viewMembersController'
+        });
+    };
+}]);
+
+corbo.controller('viewMembersController', ['$scope', '$modalInstance', 'People', function($scope, $modalInstance, People){
+    $scope.members = People.items;
+    $scope.cancel = function(){
+        $modalInstance.dismiss('cancel');
     };
 }]);
 
@@ -131,6 +150,7 @@ corbo.controller('calendarController', ['$scope', '$filter', 'Events', function(
             _.map(event, function(val){
                 var justMonth = $filter('date')(val.date, 'MMMM');
                 if(justMonth === $scope.newMonth) {
+                    console.log("VALUE:: ", val);
                     $scope.events.push(val);
                 }
             });
@@ -187,16 +207,31 @@ corbo.controller('manageCategoriesController', ['$scope', 'Events', '$modalInsta
             savedCat = new Cat.model(savedCat);
             Cat.items.push(savedCat);
         });
+        $scope.category.name = '';
     };
 
-    $scope.deleteCategory = function(selectedId){
+    $scope.deleteCategory = function(index, selectedId){
         Cat.model.delete({id: selectedId});
-        $scope.categories = _.chain(Cat.items)
-                            .map(function(val){
-                                if(val._id != selectedId) { return val }
-                            }).compact().value();
+        $scope.categories.splice(index, 1);
     };
 
+    $scope.cancel = function(){
+        $modalInstance.dismiss('cancel');
+    };
+}]);
+
+corbo.controller('newMemberController', ['$scope', '$modalInstance', 'People', 'Cat', 'PeopleCat', function($scope, $modalInstance, People, Cat, PeopleCat){
+    $scope.categories = Cat.items;
+
+    $scope.newMember = {};
+    $scope.confirm = function(){
+        var newTeamMember = new People.model($scope.newMember);
+        newTeamMember.$save(function(savedMember){
+            savedMember = new People.model(savedMember);
+            People.items.push(savedMember);
+        });
+        $scope.newMember = {};
+    };
     $scope.cancel = function(){
         $modalInstance.dismiss('cancel');
     };

@@ -27,7 +27,7 @@
 .container
     .jumbotron(ng-controller="calendarController")
         h1 {{newMonth | date: 'MMMM y'}}
-        .container(ng-repeat="event in events")
+        .container(ng-repeat="event in events | orderBy: 'date'")
             p {{event.date | date: 'MMMM d'}} 
             .container(ng-repeat="category in event.people")
                 h3 {{category.category}}

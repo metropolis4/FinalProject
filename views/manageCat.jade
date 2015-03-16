@@ -5,7 +5,7 @@
         ul
             li.lead(ng-repeat="category in categories") {{::category.name}}
                 |   &nbsp;
-                a.btn.btn-warning.btn-xs.glyphicon.glyphicon-remove(ng-click="deleteCategory(category._id)") 
+                a.btn.btn-warning.btn-xs.glyphicon.glyphicon-remove(ng-click="deleteCategory($index, category._id)") 
         
 .modal-footer
     form.form-inline(ng-submit="addCategoryForm.$valid && addCategory()", name="addCategoryForm", novalidate)

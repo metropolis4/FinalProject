@@ -1,0 +1,18 @@
+.modal-header
+    h3.modal-title Team Members
+.modal-body
+    table.table.table-striped.table-responsive
+        thead
+            tr
+                th Name
+                th Email
+                th Phone
+                th Available Categories
+        tbody
+            tr(ng-repeat="member in members")
+                td {{member.name.first}} {{member.name.last}}
+                td: a {{member.email}}
+                td {{member.phone}}
+                td {{member.categories}}
+.modal-footer
+    button.btn.btn-default(ng-click="cancel()") close...

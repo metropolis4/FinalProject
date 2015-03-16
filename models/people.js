@@ -1,10 +1,13 @@
 var mongoose = require('mongoose');
 
 var peopleSchema = mongoose.Schema({
-    name      : String,
+    name      : {
+                    first: String,
+                    last: String
+                },
     categories: [String],
     email     : String,
-    phone     : Number,
+    phone     : String,
 });
 
 module.exports = mongoose.model('people', peopleSchema);
