@@ -177,7 +177,7 @@ corbo.controller('calendarController', ['$scope', '$filter', 'Events', 'People',
             $scope.allEvents = Events.items;
         });
     };
-    $scope.allEvents = Events.items;
+    $scope.allEvents = SetTimeout(function(){ return Events.items}, 300);
     console.log("INITIAL:: ", $scope.allEvents)
     var filterEvents = function(event){
         _.map(event, function(val){
@@ -187,7 +187,7 @@ corbo.controller('calendarController', ['$scope', '$filter', 'Events', 'People',
             }
         });
     };
-    $scope.$watch(function() { return Events.items; }, function(newVal, oldVal){
+    $scope.$watch(function(scope) { return scope.allEvents; }, function(newVal, oldVal){
             $scope.allEvents = newVal;
             console.log("AFTER:: ", $scope.allEvents)
     });
