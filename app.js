@@ -12,7 +12,7 @@ var mainController = require('./controllers/main'),
     authenticationController = require('./controllers/authentication'),
     indexController = require('./controllers/index');
 
-mongoose.connect('mongodb://localhost/helmer');
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/helmer');
 
 var app = express();
 app.set('view engine', 'jade');
