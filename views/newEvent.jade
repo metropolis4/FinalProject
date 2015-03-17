@@ -9,7 +9,7 @@
             .radio(ng-repeat="name in category.name")
                 label(for="{{category.name[$index]}}")
                     input(type="radio", value="{{category.name[$index]}}", ng-model="event[category.category]") 
-                    | {{category.name[$index].first}}
+                    | {{category.name[$index].first}} {{category.name[$index].last}}
 .modal-footer
     .checkbox.pull-left
         label

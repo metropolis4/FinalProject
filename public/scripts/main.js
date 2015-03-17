@@ -91,7 +91,7 @@ corbo.controller('mainMenuController', ['$scope', '$q', '$filter', 'Events', 'Ca
     $scope.allMonths = [];
     Events.model.query(function(months){
         _.map(months, function(val){
-            var justMonths = $filter('date')(val.date, 'MMMM');
+            var justMonths = $filter('date')(val.date, 'MMMM y');
             if($scope.allMonths.indexOf(justMonths) === -1){
                 $scope.allMonths.push(justMonths);
             }
@@ -173,23 +173,29 @@ corbo.controller('calendarController', ['$scope', '$filter', 'Events', 'People',
                 }
             });
             eventToUpdate.$update({id: eventToUpdate._id});
+            $scope.allEvents = Events.items;
         });
     };
-
+    $scope.allEvents = Events.items;
+    var filterEvents = function(event){
+        _.map(event, function(val){
+            var justMonth = $filter('date')(val.date, 'MMMM y');
+            if(justMonth === $scope.newMonth) {
+                $scope.events.push(val);
+            }
+        });
+    };
+    $scope.$watch(function() { return Events.items; }, function(newVal, oldVal){
+        $scope.allEvents = newVal;
+    });
     $scope.newMonth = Events.getMonth();
     $scope.$watch(function() { return Events.getMonth(); }, function(newVal, oldVal) {
         if(newVal !== oldVal) {
             $scope.newMonth = newVal;
         }
         $scope.events = [];
-        Events.model.query(function(event){
-            _.map(event, function(val){
-                var justMonth = $filter('date')(val.date, 'MMMM');
-                if(justMonth === $scope.newMonth) {
-                    $scope.events.push(val);
-                }
-            });
-        });
+        filterEvents($scope.allEvents);
+        console.log("EVENTS in $watch:: ", $scope.events);
     }, true);
 
 

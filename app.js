@@ -59,6 +59,7 @@ app.get('/viewMembers', mainController.viewMembers);
 app.post('/api/people', mainController.createNewMember);
 app.put('/api/people/:id', mainController.deleteMember);
 
-var server = app.listen(5960, function() {
+var port = process.env.PORT || 5960;
+var server = app.listen(port, function() {
 	console.log('Express server listening on port ' + server.address().port);
 });
