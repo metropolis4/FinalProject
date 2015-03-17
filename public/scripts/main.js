@@ -16,7 +16,7 @@ corbo.factory('Events', function($resource){
         events: $resource('/api/event/:id' , {}, {
             update: { method: 'PUT', params: {id: '@id'}}
         }),
-        month: 'March'
+        month: 'Welcome Back!'
     };
     return {
         getMonth: function(){
@@ -155,9 +155,7 @@ corbo.controller('viewMembersController', ['$scope', '$modalInstance', 'People',
 }]);
 
 corbo.controller('calendarController', ['$scope', '$filter', 'Events', 'People', function($scope, $filter, Events, People){
-    $scope.events = [];
     var people = People.items;
-
     $scope.replacements = [];
     $scope.sortPeople = function(category, name){
         $scope.replacements = [];
@@ -179,7 +177,7 @@ corbo.controller('calendarController', ['$scope', '$filter', 'Events', 'People',
     };
 
     $scope.newMonth = Events.getMonth();
-    $scope.$watch(function() { return Events.getMonth() }, function(newVal, oldVal) {
+    $scope.$watch(function() { return Events.getMonth(); }, function(newVal, oldVal) {
         if(newVal !== oldVal) {
             $scope.newMonth = newVal;
         }
@@ -192,7 +190,7 @@ corbo.controller('calendarController', ['$scope', '$filter', 'Events', 'People',
                 }
             });
         });
-    });
+    }, true);
 
 
     $scope.toggleDropdown = function($event){
