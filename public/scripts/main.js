@@ -173,10 +173,12 @@ corbo.controller('calendarController', ['$scope', '$filter', 'Events', 'People',
                 }
             });
             eventToUpdate.$update({id: eventToUpdate._id});
+
             $scope.allEvents = Events.items;
         });
     };
     $scope.allEvents = Events.items;
+    console.log("INITIAL:: ", $scope.allEvents)
     var filterEvents = function(event){
         _.map(event, function(val){
             var justMonth = $filter('date')(val.date, 'MMMM y');
@@ -186,7 +188,8 @@ corbo.controller('calendarController', ['$scope', '$filter', 'Events', 'People',
         });
     };
     $scope.$watch(function() { return Events.items; }, function(newVal, oldVal){
-        $scope.allEvents = newVal;
+            $scope.allEvents = newVal;
+            console.log("AFTER:: ", $scope.allEvents)
     });
     $scope.newMonth = Events.getMonth();
     $scope.$watch(function() { return Events.getMonth(); }, function(newVal, oldVal) {

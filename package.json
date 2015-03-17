@@ -1,8 +1,10 @@
 {
-  "name": "corbo app",
+  "name": "corbo-app",
   "version": "0.1.0",
   "description": "Small Team Organizational Assistant",
-  "main": "index.js",
+  "scripts": {
+    "start": "node app.js"
+    },
   "dependencies": {
     "body-parser": "^1",
     "express": "^4",
@@ -24,7 +26,5 @@
     "type": "git",
     "url": "https://github.com/metropolis4/FinalProject.git"
   },
-  "scripts": "node app.js",
-  "author": "Matt Rich",
-
+  "author": "Matt Rich"
 }
