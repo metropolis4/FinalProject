@@ -1,41 +1,38 @@
 Main Features:
   Main page:
     Nav Bar:
-     ☐ Create New schedule date
-     ☐ Create New Volunteer
-     ☐ Create New Substitute
-     ☐ View Dates By Month
-     ☐ View All Volunteers
-     ☐ View Substitutes
+     ✔ Create New schedule date @done (15-03-16 17:11)
+     ✔ Create New Volunteer @done (15-03-16 17:11)
+     ✔ Create New Substitute @done (15-03-16 17:11)
+     ✔ View Dates By Month @done (15-03-16 17:11)
+     ✔ View All Volunteers @done (15-03-16 17:11)
+     ✔ View Substitutes @done (15-03-16 17:11)
     Calendar:
-     ☐ Accordion featuring all scheduled dates in the current month
-     ☐ Each Date contains info on the people scheduled per category
-     ☐ When a person is clicked a modal opens asking if a sub is needed
+     ✔ Accordion featuring all scheduled dates in the current month @done (15-03-16 17:12)
+     ✔ Each Date contains info on the people scheduled per category @done (15-03-16 17:12)
+     ✔ When a person is clicked a modal opens asking if a sub is needed @done (15-03-16 17:12)
      ☐ A list possible subs populates; when one is clicked, a second modal opens with two buttons to send an email request to that person, or replace the currently selected person with that substitute
-     ☐ The month is displayed at the top and the calendar window only shows dates within the selected month
+     ✔ The month is displayed at the top and the calendar window only shows dates within the selected month @done (15-03-16 17:12)
     Create New Date:
-     ☐ a modal that contains a form
-     ☐ The form contains a date selector, and populates the categories with lists of available volunteers for each category with checkboxes
-     ☐ When the form is submitted a new scheduled date is created with the selected volunteers populated into their respected categories
-     ☐ Ability to save a template to use for later dates. 
-           ☐  Possibly have the modal begin by asking create new or use template 
+     ✔ a modal that contains a form @done (15-03-16 17:12)
+     ✔ The form contains a date selector, and populates the categories with lists of available volunteers for each category with checkboxes @done (15-03-16 17:12)
+     ✔ When the form is submitted a new scheduled date is created with the selected volunteers populated into their respected categories @done (15-03-16 17:12)
+     ✔ Ability to save a template to use for later dates.  @done (15-03-16 17:12)
     Create New Volunteer/Sub:
-     ☐ A form to create a new volunteer/substitute
-     ☐ On submission the created volunteer/sub is populated into the appropriate database
+     ✔ A form to create a new volunteer/substitute @done (15-03-16 17:13)
+     ✔ On submission the created volunteer/sub is populated into the appropriate database @done (15-03-16 17:13)
     View All Vol/Sub:
-     ☐ View a list of all Vol/Sub in the database with all of their relevant information
-     ☐ Offer the ability to update/change information or delete a volunteer
+     ✔ View a list of all Vol/Sub in the database with all of their relevant information @done (15-03-16 17:13)
+     ✔ Offer the ability to update/change information or delete a volunteer @done (15-03-16 17:13)
      ☐ When their email is clicked a modal pops up to send an email to that person
   Splash Page:
-    ☐ Nav Bar, info about using the tool
-    ☐ Login button sends user to Main Page
-    ☐ Get Started sends user to Create Account page
+    ✔ Nav Bar, info about using the tool @done (15-03-16 17:13)
+    ✔ Login button sends user to Main Page @done (15-03-16 17:13)
+    ✔ Get Started sends user to Create Account page @done (15-03-16 17:13)
   Create Account Page:
-    ☐ Create username/password
-          ☐  Oauth instead??
+    ✔ Create username/password @done (15-03-16 17:13)
     ☐ Provide a link to the company google calendar
-    ☐ Enter Info for volunteers
-    ☐ Email/contact info
+    ✔ Email/contact info @done (15-03-16 17:14)
 
 API's/technologies:
   ☐ Mail Gun
@@ -47,10 +44,10 @@ API's/technologies:
       ☐ Auto populate a new event on the groups calendar when created
       ☐ Reminders/notifications?
       ☐ Auto sync with changes made to events and send auto reminders updates to those people
-  ☐ Passport
-      ☐ Login authentication
-  ☐ Client-side framework?
-  ☐ UI Framework?
+  ✔ Passport @done (15-03-16 17:14)
+      ✔ Login authentication @done (15-03-16 17:14)
+  ✔ Client-side framework? @done (15-03-16 17:14)
+  ✔ UI Framework? @done (15-03-16 17:14)
 
 
 

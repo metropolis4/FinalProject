@@ -11,10 +11,11 @@ accordion(close-others="true")
                             p.lead {{category.name}}
                     .modal-footer
                         .dropdown(dropdown, on-toggle="toggled(open)")
-                            button.btn.btn-info.dropdown-toggle(data-toggle="dropdown", dropdown-toggle, ng-click="sortPeople(category.category, category.name)") find a sub...
+                            button.btn.btn-primary.dropdown-toggle(data-toggle="dropdown", dropdown-toggle, ng-click="sortPeople(category.category, category.name)") find a sub...
                                 | &nbsp;
                                 span.caret
                             .container.dropdown-menu(role="menu")
-                                ul.list-unstyled
-                                    li(ng-repeat="replacement in replacements")
-                                        a(ng-click="replace(replacement, category.category, event)") {{replacement}}
+                                .container.sub-cards
+                                    ul.list-unstyled
+                                        li.text-center(ng-repeat="replacement in replacements")
+                                            a.lead(ng-click="replace(replacement, category.category, event)") {{replacement}}

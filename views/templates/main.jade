@@ -6,16 +6,19 @@
                     span.icon-bar
                     span.icon-bar
                     span.icon-bar
-                a.navbar-brand(href="/") Corbo
+                a.navbar-brand#brand(href="/") Corbo
                     span.glyphicon.glyphicon-apple
             .navbar-collapse(id="main-nav", collapse="isCollapsed")
                 ul.nav.navbar-nav
                     li
-                        a(ng-click="openNewEvent()") New Event
+                        a(ng-click="openNewEvent()") New Event  
+                            span.nav-icons.glyphicon.glyphicon-calendar
                     li
-                        a(ng-click="openNewMember()") New Team Member
+                        a(ng-click="openNewMember()") New Team Member   
+                            span.nav-icons.glyphicon.glyphicon-user
                     li
-                        a(ng-click="openViewMembers()") View Team Members
+                        a(ng-click="openViewMembers()") View Team Members   
+                            span.nav-icons.glyphicon.glyphicon-sunglasses
                     li.dropdown(dropdown, on-toggle="toggled(open)")
                         a.dropdown-toggle(data-toggle="dropdown", role="button", dropdown-toggle) View Month
                             span.caret
@@ -23,8 +26,9 @@
                             li(ng-repeat="month in allMonths")
                                 a(ng-click="changeMonth()") {{month | date: 'MMMM'}}
                     li
-                        a(ng-click="openManageCategories()") Manage Categories
+                        a(ng-click="openManageCategories()") Manage Categories   
+                            span.nav-icons.glyphicon.glyphicon-edit
 .container
-    .jumbotron(ng-controller="calendarController")
+    .jumbotron.calendar-accordion(ng-controller="calendarController")
         h1.text-center {{newMonth | date: 'MMMM y'}}
         calendaraccordion

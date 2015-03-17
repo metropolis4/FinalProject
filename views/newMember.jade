@@ -6,13 +6,13 @@
             h4 Name
             .form-group.col-md-6
                 label(for="name.first") first
-                input.form-control(type="text", ng-model="newMember.name.first", placeholder="Marvin" required)
+                input.form-control(type="text", ng-model="newMember.name.first", placeholder="David" required)
             .form-group.col-md-6
                 label(for="name.last") last
-                input.form-control(type="text", ng-model="newMember.name.last", placeholder="Martian" required)
+                input.form-control(type="text", ng-model="newMember.name.last", placeholder="St. Hubbins" required)
         .form-group
             label(for="email") email
-            input.form-control(type="email", ng-model="newMember.email", placeholder="oscarmeyer@weiner.com" required)
+            input.form-control(type="email", ng-model="newMember.email", placeholder="jpalter@folksmen.com" required)
         .form-group
             label(for="phone") phone
             input.form-control(type="tel", ng-model="newMember.phone", placeholder="xxx-xxx-xxxx" required)
@@ -24,5 +24,5 @@
                     | &nbsp;
                     | {{category.name}}
 .modal-footer
-    button.btn.btn-info(ng-click="createNewMember.$valid && confirm()") save...
+    button.btn.btn-primary(ng-click="createNewMember.$valid && confirm()") save...
     button.btn.btn-default(ng-click="cancel()") close...

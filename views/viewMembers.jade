@@ -15,6 +15,8 @@
                 td {{member.name.first}} {{member.name.last}}
                 td: a {{member.email}}
                 td {{member.phone}} 
-                td {{member.categories}}
+                td
+                    span {{member.categories.join()}}
+                    //- span(ng-repeat="category in member.categories") {{category}}
 .modal-footer
     button.btn.btn-default(ng-click="cancel()") close...

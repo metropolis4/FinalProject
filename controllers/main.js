@@ -22,9 +22,7 @@ var mainController = {
                     .pairs()
                     .map(function(val){
                         var name = JSON.parse(val[1]);
-                        console.log("INITIAL VAL:: ", name.first);
                         var peopleObj = { name: name.first, category: val[0]};
-                        console.log("PARSED?:: ", peopleObj);
                         return peopleObj;
                     })
                     .value();
@@ -32,7 +30,6 @@ var mainController = {
             people: people,
             date  : date
         };
-console.log("FROM SERVER:: ", formattedEvent);
         var newEvent = new Event(formattedEvent);
         newEvent.save(function(err, results){
             if(err) throw err;
@@ -48,7 +45,6 @@ console.log("FROM SERVER:: ", formattedEvent);
     getSingleEvent: function(req, res){
         Event.findById(req.params.id, function(err, results){
             if(err) throw err;
-        console.log(results);
             res.send(results);
         });
     },
@@ -79,7 +75,6 @@ console.log("FROM SERVER:: ", formattedEvent);
         });
     },
     deleteMember: function(req, res){
-        console.log("FROM SERVER::: ", req.body)
         var toDelete = People.findById(req.body.id);
         People.remove(toDelete, function(err, results){
             if(err) throw err;
@@ -117,7 +112,6 @@ console.log("FROM SERVER:: ", formattedEvent);
             phone     : phone
         };
         var newPerson = new People(formattedPerson);
-        console.log(newPerson);
         newPerson.save(function(err, results){
             if(err) throw err;
             res.send(results);
