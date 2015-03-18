@@ -201,7 +201,7 @@ corbo.controller('calendarController', ['$timeout', '$scope', '$filter', 'Events
     $scope.isCollapsed = true;
 }]);
 
-corbo.controller('newEventController', ['$scope', '$q', 'Events', '$modalInstance', 'Cat', 'People', 'PeopleCat',function($scope, $q, Events, $modalInstance, Cat, People, PeopleCat){
+corbo.controller('newEventController', ['$scope', '$q', '$modalInstance', 'Events', 'Cat', 'People', 'PeopleCat',function($scope, $q, $modalInstance, Events, Cat, People, PeopleCat){
     $scope.cancel = function(){
         $modalInstance.dismiss('cancel');
     };
