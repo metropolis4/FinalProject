@@ -27,8 +27,9 @@ var mainController = {
                     })
                     .value();
         var formattedEvent = {
-            people: people,
-            date  : date
+            people : people,
+            date   : date,
+            user_id: req.user._id
         };
         var newEvent = new Event(formattedEvent);
         newEvent.save(function(err, results){
@@ -37,7 +38,7 @@ var mainController = {
         });
     },
     getEvents: function(req, res){
-        Event.find({}, function(err, results){
+        Event.find({user_id: req.user._id}, function(err, results){
             if(err) throw err;
             res.send(results);
         });
@@ -55,13 +56,17 @@ var mainController = {
         });
     },
     getCategories: function(req, res){
-        Cat.find({}, function(err, results){
+        Cat.find({user_id: req.user._id}, function(err, results){
             if(err) throw err;
             res.send(results);
         });
     },
     newCategory: function(req, res){
-        var newCat = new Cat(req.body);
+        var formattedCat = {
+            name   : req.body.name,
+            user_id: req.user._id
+        };
+        var newCat = new Cat(formattedCat);
         newCat.save(function(err, results){
             if(err) throw err;
             res.send(results);
@@ -85,7 +90,7 @@ var mainController = {
         res.render('manageCat');
     },
     getPeople: function(req, res){
-        People.find({}, function(err, results){
+        People.find({user_id: req.user._id}, function(err, results){
             if(err) throw err;
             res.send(results);
         });
@@ -109,7 +114,8 @@ var mainController = {
             name      : name,
             categories: categories,
             email     : email,
-            phone     : phone
+            phone     : phone,
+            user_id   : req.user._id
         };
         var newPerson = new People(formattedPerson);
         newPerson.save(function(err, results){

@@ -8,6 +8,7 @@ var peopleSchema = mongoose.Schema({
     categories: [String],
     email     : String,
     phone     : String,
+    user_id   : String
 });
 
 module.exports = mongoose.model('people', peopleSchema);

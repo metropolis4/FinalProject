@@ -98,7 +98,7 @@ corbo.controller('mainMenuController', ['$scope', '$q', '$filter', 'Events', 'Ca
         });
     });
     $scope.newMonth = Events.getMonth();
-    $scope.$watch('newMonth', function(newVal) {
+    $scope.$watch('newMonth', function(newVal, oldVal) {
         Events.setMonth(newVal);
     });
     $scope.changeMonth = function(){
@@ -206,10 +206,18 @@ corbo.controller('newEventController', ['$scope', '$q', '$modalInstance', 'Event
         $modalInstance.dismiss('cancel');
     };
 
-    var event = getPromiseValue(PeopleCat.all);
+    $scope.event = (function() {
+        return PeopleCat.all.$$state.value;
+    })();
+    // function getPromiseValue(list){
+    //     return PeopleCat.all.$$state.value;
+    // }
+    // var event = getPromiseValue(PeopleCat.all);
+    // Above is the original data structure... to be considered
+
     var keys = [];
     var values = [];
-    var categoryNames = _.map(event, function(item){
+    _.map($scope.event, function(item){
         keys.push(item.cat.name);
         var midValue = [];
         _.map(item.people, function(val){
@@ -291,7 +299,3 @@ corbo.directive('calendaraccordion', function(){
 });
 
 })();
-
-function getPromiseValue(promise) {
-    return promise.$$state.value;
-}
