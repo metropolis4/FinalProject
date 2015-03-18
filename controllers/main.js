@@ -2,7 +2,6 @@ var Event  = require('../models/events.js'),
     People = require('../models/people.js'),
     Cat    = require('../models/categories.js');
 
-var calendar = require('../public/scripts/calendar.js');
 var _ = require('underscore');
 
 var mainController = {

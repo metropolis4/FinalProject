@@ -66,7 +66,7 @@ span.glyphicon.nav-icons {
     color: #ffffff;
     border-radius: 5px;
 }
-.test-class {
+.accordion-rows {
     padding-left: 5%;
 }
 .modal-header>h3 {
@@ -81,4 +81,10 @@ span.glyphicon.nav-icons {
 }
 .sub-cards {
     margin-top: 10px;
+}
+.center-block.cards {
+    margin-bottom: 26px;
+}
+.replacement-items {
+    border-bottom: 1px solid #ccc;
 }

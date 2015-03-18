@@ -70,24 +70,13 @@ corbo.factory('People', function($resource){
 });
 
 corbo.factory('PeopleCat', function ($q, Cat, People) {
-
-    function calcPeopleCat(categories, people) {
-        return _.map(categories, function (cat) {
-            return {cat: cat, people: people};
-        });
-    }
-
     return {
-        all: $q.all([Cat.items.$promise, People.items.$promise]).then(function(data){
-            var categories = data[0];
-            var people = data[1];
-            console.log("CATS:: ", categories, " PEOPLE::: ", people)
-            return calcPeopleCat(categories, people);
-        })
+        all: $q.all([Cat.items.$promise, People.items.$promise])
     };
 }); 
 
-corbo.controller('mainMenuController', ['$scope', '$q', '$filter', 'Events', 'Cat', 'PeopleCat', '$modal', function($scope, $q, $filter, Events, Cat, PeopleCat, $modal){
+corbo.controller('mainMenuController', ['$scope', '$q', '$filter', 'Events', 'Cat', 'PeopleCat', '$modal', 
+    function($scope, $q, $filter, Events, Cat, PeopleCat, $modal){
     // Controlls for the 'View Month' Element
     $scope.allMonths = [];
     Events.model.query(function(months){
@@ -143,7 +132,8 @@ corbo.controller('mainMenuController', ['$scope', '$q', '$filter', 'Events', 'Ca
     };
 }]);
 
-corbo.controller('viewMembersController', ['$scope', '$modalInstance', 'People', function($scope, $modalInstance, People){
+corbo.controller('viewMembersController', ['$scope', '$modalInstance', 'People', 
+    function($scope, $modalInstance, People){
     $scope.members = People.items;
     $scope.cancel = function(){
         $modalInstance.dismiss('cancel');
@@ -155,7 +145,8 @@ corbo.controller('viewMembersController', ['$scope', '$modalInstance', 'People',
     };
 }]);
 
-corbo.controller('calendarController', ['$timeout', '$scope', '$filter', 'Events', 'People', function($timeout, $scope, $filter, Events, People){
+corbo.controller('calendarController', ['$timeout', '$scope', '$filter', 'Events', 'People', 
+    function($timeout, $scope, $filter, Events, People){
     var people = People.items;
     $scope.replacements = [];
     $scope.sortPeople = function(category, name){
@@ -166,7 +157,7 @@ corbo.controller('calendarController', ['$timeout', '$scope', '$filter', 'Events
             }
         });
     };
-     var allEvents = Events.items;
+    $scope.allEvents = Events.items;
     $scope.replace = function(replacement, category, event, index){
         var eventToUpdate = Events.model.get({id: event._id}, function(){
             _.map(eventToUpdate.people, function(val){
@@ -192,7 +183,7 @@ corbo.controller('calendarController', ['$timeout', '$scope', '$filter', 'Events
             $scope.newMonth = newVal;
         }
         $scope.events = [];
-        filterEvents(allEvents);
+        filterEvents($scope.allEvents);
     }, true);
     $scope.toggleDropdown = function($event){
         $event.preventDefault();
@@ -202,40 +193,27 @@ corbo.controller('calendarController', ['$timeout', '$scope', '$filter', 'Events
     $scope.isCollapsed = true;
 }]);
 
-corbo.controller('newEventController', ['$timeout', '$scope', '$q', '$modalInstance', 'Events', 'Cat', 'People', 'PeopleCat',function($timeout, $scope, $q, $modalInstance, Events, Cat, People, PeopleCat){
+corbo.controller('newEventController', ['$rootScope', '$timeout', '$scope', '$q', '$modalInstance', 'Events', 'Cat', 'People', 'PeopleCat',
+    function($rootScope, $timeout, $scope, $q, $modalInstance, Events, Cat, People, PeopleCat){
     $scope.cancel = function(){
         $modalInstance.dismiss('cancel');
     };
 
-    // $scope.event = (function() {
-    //     return PeopleCat.all.$$state.value;
-    // })();
-    // 
-    // 
-    // function getPromiseValue(list){
-    //     return PeopleCat.all.$$state.value;
-    // }
-    // var event = getPromiseValue(PeopleCat.all);
-    // Above is the original data structure... to be considered
-    // 
-    // 
-    var event = PeopleCat.all.$$state.value;
-    // console.log('BEFORE::: ', event)
-    $scope.$watch(function(){ return Cat.items}, function(newVal, oldVal){
-        // console.log("NEWVAL::: ", newVal, " OLDVAL::: ", oldVal)
-        if(newVal) {
-            // return event = PeopleCat.all.$$state.value;
-            $scope.$apply(function(){ return event = PeopleCat.all.$$state.value});
-        }
-
-    });
-
-    // $timeout(function(){ console.log('AFTER::: ', event) }, 1000);
+    var calcPeopleCat = function(categories, people) {
+        return _.map(categories, function (cat) {
+            return {cat: cat, people: people};
+        });
+    };
+    // Oh no, $rootScope! fix this later
+    $rootScope.peopleCat = (function(){
+        var peopleCats = PeopleCat.all.$$state.value;
+       return calcPeopleCat(peopleCats[0], peopleCats[1]);
+   })();
 
     var keys = [];
     var values = [];
     $scope.event = (function(){
-    _.map(event, function(item){
+    _.map($rootScope.peopleCat, function(item){
         keys.push(item.cat.name);
         var midValue = [];
         _.map(item.people, function(val){
@@ -245,10 +223,9 @@ corbo.controller('newEventController', ['$timeout', '$scope', '$q', '$modalInsta
         });
         values.push(midValue);
     });
-    // $scope.$apply();
     })();
     
-    $scope.categories = [];
+    $rootScope.categories = [];
     var eventObjects = _.pairs(_.object(keys, values));
     eventObjects = _.map(eventObjects, function(val){
         var newObj = {};
@@ -271,7 +248,8 @@ corbo.controller('newEventController', ['$timeout', '$scope', '$q', '$modalInsta
     };
 }]);
 
-corbo.controller('manageCategoriesController', ['$scope', 'Events', '$modalInstance', 'Cat', function($scope, Events, $modalInstance, Cat){
+corbo.controller('manageCategoriesController', ['$scope', 'Events', '$modalInstance', 'Cat', 
+    function($scope, Events, $modalInstance, Cat){
     
     $scope.categories = Cat.items;
     $scope.category = {};
@@ -294,7 +272,8 @@ corbo.controller('manageCategoriesController', ['$scope', 'Events', '$modalInsta
     };
 }]);
 
-corbo.controller('newMemberController', ['$scope', '$modalInstance', 'People', 'Cat', 'PeopleCat', function($scope, $modalInstance, People, Cat, PeopleCat){
+corbo.controller('newMemberController', ['$scope', '$modalInstance', 'People', 'Cat', 'PeopleCat', 
+    function($scope, $modalInstance, People, Cat, PeopleCat){
     $scope.categories = Cat.items;
 
     $scope.newMember = {};
@@ -317,5 +296,4 @@ corbo.directive('calendaraccordion', function(){
         templateUrl: '/templates/calendarAccordion'
     };
 });
-
 })();

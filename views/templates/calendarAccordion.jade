@@ -1,7 +1,7 @@
 accordion(close-others="true")
     accordion-group(ng-repeat="event in events | orderBy: 'date'" is-open="status.open")
         accordion-heading {{event.date | date: 'MMMM d'}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-up': status.open, 'glyphicon-chevron-down': !status.open}"></i>
-        .container.row.test-class
+        .container.row.accordion-rows
             .container.col-md-3.center-block.cards(ng-repeat="category in event.people")
                 .container
                     .modal-header 
@@ -17,5 +17,9 @@ accordion(close-others="true")
                             .container.dropdown-menu(role="menu")
                                 .container.sub-cards
                                     ul.list-unstyled
-                                        li.text-center(ng-repeat="replacement in replacements")
-                                            a.lead(ng-click="replace(replacement, category.category, event, $parent.$index)") {{replacement.name.first}} {{index}}
+                                        li.replacement-items(ng-repeat="replacement in replacements")
+                                            a.lead(ng-click="replace(replacement, category.category, event, $parent.$index)") {{replacement.name.first}}
+                                            br
+                                            a {{replacement.email}}
+                                            br
+                                            | {{replacement.phone}}
