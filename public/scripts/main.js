@@ -154,31 +154,29 @@ corbo.controller('viewMembersController', ['$scope', '$modalInstance', 'People',
     };
 }]);
 
-corbo.controller('calendarController', ['$scope', '$filter', 'Events', 'People', function($scope, $filter, Events, People){
+corbo.controller('calendarController', ['$timeout', '$scope', '$filter', 'Events', 'People', function($timeout, $scope, $filter, Events, People){
     var people = People.items;
     $scope.replacements = [];
     $scope.sortPeople = function(category, name){
         $scope.replacements = [];
         _.map(people, function(val){
             if(val.categories.indexOf(category) !== -1 && val.name.first !== name){
-                $scope.replacements.push(val.name.first);
+                $scope.replacements.push(val);
             }
         });
     };
-    $scope.replace = function(replacement, category, event){
+     var allEvents = Events.items;
+    $scope.replace = function(replacement, category, event, index){
         var eventToUpdate = Events.model.get({id: event._id}, function(){
             _.map(eventToUpdate.people, function(val){
                 if(val.category === category) {
-                    val.name = replacement;
+                    val.name = replacement.name.first;
                 }
             });
+            event.people[index].name = replacement.name.first;
             eventToUpdate.$update({id: eventToUpdate._id});
-
-            $scope.allEvents = Events.items;
         });
     };
-    $scope.allEvents = SetTimeout(function(){ return Events.items}, 300);
-    console.log("INITIAL:: ", $scope.allEvents)
     var filterEvents = function(event){
         _.map(event, function(val){
             var justMonth = $filter('date')(val.date, 'MMMM y');
@@ -187,21 +185,14 @@ corbo.controller('calendarController', ['$scope', '$filter', 'Events', 'People',
             }
         });
     };
-    $scope.$watch(function(scope) { return scope.allEvents; }, function(newVal, oldVal){
-            $scope.allEvents = newVal;
-            console.log("AFTER:: ", $scope.allEvents)
-    });
     $scope.newMonth = Events.getMonth();
     $scope.$watch(function() { return Events.getMonth(); }, function(newVal, oldVal) {
         if(newVal !== oldVal) {
             $scope.newMonth = newVal;
         }
         $scope.events = [];
-        filterEvents($scope.allEvents);
-        console.log("EVENTS in $watch:: ", $scope.events);
+        filterEvents(allEvents);
     }, true);
-
-
     $scope.toggleDropdown = function($event){
         $event.preventDefault();
         $event.stopPropagation();

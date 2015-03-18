@@ -18,4 +18,4 @@ accordion(close-others="true")
                                 .container.sub-cards
                                     ul.list-unstyled
                                         li.text-center(ng-repeat="replacement in replacements")
-                                            a.lead(ng-click="replace(replacement, category.category, event)") {{replacement}}
+                                            a.lead(ng-click="replace(replacement, category.category, event, $parent.$index)") {{replacement.name.first}} {{index}}
