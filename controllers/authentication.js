@@ -1,11 +1,18 @@
 var passport = require('passport'),
     User = require('../models/user');
-
-var performLogin = function(req, res, next, user){
+var loginHelpers = {
+    performLogin: function(req, res, next, user){
     req.login(user, function(err){
         if(err) return next(err);
         return res.redirect('/main');
     });
+},
+    performNewUser: function(req, res, next, user){
+    req.login(user, function(err){
+        if(err) return next(err);
+        return res.redirect('/login');
+    });
+}
 };
 
 var authenticationController = {
@@ -21,12 +28,11 @@ var authenticationController = {
                 req.flash('error', 'Login Error. Please Try Again');
                 return res.redirect('/login');
             }
-            performLogin(req, res, next, user);
+            loginHelpers.performLogin(req, res, next, user);
         });
         authFunction(req, res, next);
     },
     processSignup: function(req, res, next){
-        console.log("CONTENT:: ", req.body);
         var user = new User({
             username: req.body.username,
             password: req.body.password,
@@ -39,9 +45,9 @@ var authenticationController = {
                     errorMessage = "User Already Exists.";
                 }
                 req.flash('error', errorMessage);
-                return res.redirect('/auth/signUp');
+                return res.redirect('/signup');
             }
-            performLogin(req, res, next, user);
+            loginHelpers.performNewUser(req, res, next, user);
         });
     },
     logout: function(req, res){

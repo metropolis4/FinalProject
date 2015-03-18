@@ -81,6 +81,7 @@ corbo.factory('PeopleCat', function ($q, Cat, People) {
         all: $q.all([Cat.items.$promise, People.items.$promise]).then(function(data){
             var categories = data[0];
             var people = data[1];
+            console.log("CATS:: ", categories, " PEOPLE::: ", people)
             return calcPeopleCat(categories, people);
         })
     };
@@ -201,23 +202,40 @@ corbo.controller('calendarController', ['$timeout', '$scope', '$filter', 'Events
     $scope.isCollapsed = true;
 }]);
 
-corbo.controller('newEventController', ['$scope', '$q', '$modalInstance', 'Events', 'Cat', 'People', 'PeopleCat',function($scope, $q, $modalInstance, Events, Cat, People, PeopleCat){
+corbo.controller('newEventController', ['$timeout', '$scope', '$q', '$modalInstance', 'Events', 'Cat', 'People', 'PeopleCat',function($timeout, $scope, $q, $modalInstance, Events, Cat, People, PeopleCat){
     $scope.cancel = function(){
         $modalInstance.dismiss('cancel');
     };
 
-    $scope.event = (function() {
-        return PeopleCat.all.$$state.value;
-    })();
+    // $scope.event = (function() {
+    //     return PeopleCat.all.$$state.value;
+    // })();
+    // 
+    // 
     // function getPromiseValue(list){
     //     return PeopleCat.all.$$state.value;
     // }
     // var event = getPromiseValue(PeopleCat.all);
     // Above is the original data structure... to be considered
+    // 
+    // 
+    var event = PeopleCat.all.$$state.value;
+    // console.log('BEFORE::: ', event)
+    $scope.$watch(function(){ return Cat.items}, function(newVal, oldVal){
+        // console.log("NEWVAL::: ", newVal, " OLDVAL::: ", oldVal)
+        if(newVal) {
+            // return event = PeopleCat.all.$$state.value;
+            $scope.$apply(function(){ return event = PeopleCat.all.$$state.value});
+        }
+
+    });
+
+    // $timeout(function(){ console.log('AFTER::: ', event) }, 1000);
 
     var keys = [];
     var values = [];
-    _.map($scope.event, function(item){
+    $scope.event = (function(){
+    _.map(event, function(item){
         keys.push(item.cat.name);
         var midValue = [];
         _.map(item.people, function(val){
@@ -227,6 +245,8 @@ corbo.controller('newEventController', ['$scope', '$q', '$modalInstance', 'Event
         });
         values.push(midValue);
     });
+    // $scope.$apply();
+    })();
     
     $scope.categories = [];
     var eventObjects = _.pairs(_.object(keys, values));
