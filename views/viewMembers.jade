@@ -13,7 +13,7 @@
             tr(ng-repeat="member in members")
                 td: a.btn.btn-danger.btn-xs.glyphicon.glyphicon-remove(ng-click="deletePerson($index, member._id)")
                 td {{member.name.first}} {{member.name.last}}
-                td: a {{member.email}}
+                td: a(ng-href="mailto:{{member.email}}?subject=Hello%20from%20your%20corbo%20team") {{member.email}}
                 td {{member.phone}} 
                 td
                     span {{member.categories.join()}}

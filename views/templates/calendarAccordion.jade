@@ -20,6 +20,6 @@ accordion(close-others="true")
                                         li.replacement-items(ng-repeat="replacement in replacements")
                                             a.lead(ng-click="replace(replacement, category.category, event, $parent.$index)") {{replacement.name.first}}
                                             br
-                                            a {{replacement.email}}
+                                            a(ng-href="mailto:{{replacement.email}}?subject=Can%20you%20sub?") {{replacement.email}}
                                             br
                                             | {{replacement.phone}}
