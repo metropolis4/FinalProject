@@ -145,8 +145,8 @@ corbo.controller('viewMembersController', ['$scope', '$modalInstance', 'People',
     };
 }]);
 
-corbo.controller('calendarController', ['$timeout', '$scope', '$filter', 'Events', 'People', 
-    function($timeout, $scope, $filter, Events, People){
+corbo.controller('calendarController', ['$scope', '$filter', 'Events', 'People', 
+    function $scope, $filter, Events, People){
     var people = People.items;
     $scope.replacements = [];
     $scope.sortPeople = function(category, name){
@@ -193,8 +193,8 @@ corbo.controller('calendarController', ['$timeout', '$scope', '$filter', 'Events
     $scope.isCollapsed = true;
 }]);
 
-corbo.controller('newEventController', ['$rootScope', '$timeout', '$scope', '$q', '$modalInstance', 'Events', 'Cat', 'People', 'PeopleCat',
-    function($rootScope, $timeout, $scope, $q, $modalInstance, Events, Cat, People, PeopleCat){
+corbo.controller('newEventController', ['$rootScope', '$scope', '$q', '$modalInstance', 'Events', 'Cat', 'People', 'PeopleCat',
+    function($rootScope, $scope, $q, $modalInstance, Events, Cat, People, PeopleCat){
     $scope.cancel = function(){
         $modalInstance.dismiss('cancel');
     };
@@ -272,8 +272,8 @@ corbo.controller('manageCategoriesController', ['$scope', 'Events', '$modalInsta
     };
 }]);
 
-corbo.controller('newMemberController', ['$scope', '$modalInstance', 'People', 'Cat', 'PeopleCat', 
-    function($scope, $modalInstance, People, Cat, PeopleCat){
+corbo.controller('newMemberController', ['$scope', '$modalInstance', 'People', 'Cat', 
+    function($scope, $modalInstance, People, Cat){
     $scope.categories = Cat.items;
 
     $scope.newMember = {};

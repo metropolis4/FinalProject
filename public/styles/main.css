@@ -88,3 +88,6 @@ span.glyphicon.nav-icons {
 .replacement-items {
     border-bottom: 1px solid #ccc;
 }
+tbody>tr>td.view-member-list {
+    width: 10em;
+}

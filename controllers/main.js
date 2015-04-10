@@ -20,8 +20,8 @@ var mainController = {
                     .omit('date')
                     .pairs()
                     .map(function(val){
-                        var name = JSON.parse(val[1]);
-                        var peopleObj = { name: name.first, category: val[0]};
+                        var name = val[1];
+                        var peopleObj = { name: name, category: val[0]};
                         return peopleObj;
                     })
                     .value();
@@ -30,11 +30,6 @@ var mainController = {
             date   : date,
             user_id: req.user._id
         };
-        var newEvent = new Event(formattedEvent);
-        newEvent.save(function(err, results){
-            if(err) throw err;
-            res.send(results);
-        });
     },
     getEvents: function(req, res){
         Event.find({user_id: req.user._id}, function(err, results){

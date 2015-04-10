@@ -6,10 +6,10 @@
             datepicker(ng-model="event.date", required)
         .form-group(ng-repeat="category in categories")
             label {{category.category}}
-            .radio(ng-repeat="name in category.name")
+            .checkbox(ng-repeat="name in category.name")
                 label(for="{{category.name[$index]}}")
-                    input(type="radio", value="{{category.name[$index]}}", ng-model="event[category.category]") 
-                    | {{category.name[$index].first}} {{category.name[$index].last}}
+                    input(type="checkbox", name="{{category.category}}", ng-true-value="{{category.name[$index]}}", ng-model="event[category.category]") 
+                    | {{name.first}} {{name.last}}
 .modal-footer
     .checkbox.pull-left
         label
@@ -17,3 +17,7 @@
             | Template (data is {{template}})
     button.btn.btn-primary(ng-click="confirm()") save...
     button.btn.btn-default(ng-click="cancel()") close...
+    //- .checkbox(ng-repeat="name in category.name")
+    //-     label(for="{{category.name[$index]}}")
+    //-         input(type="checkbox", ng-true-value="{{category.name[$index]}}", ng-model="event[category.category]") 
+    //-         | {{category.name[$index].first}} {{category.name[$index].last}}
