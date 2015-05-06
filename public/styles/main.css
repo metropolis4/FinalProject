@@ -1,5 +1,5 @@
 .nav, .pagination, .carousel, .panel-title, a { 
-    cursor: pointer; 
+    cursor: pointer;
 }
 html {
     min-height: 100%;

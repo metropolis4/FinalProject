@@ -1,4 +1,4 @@
-(function(){ 
+(function(){
 var corbo = angular.module('corbo', ['ngResource', 'ngRoute', 'ui.bootstrap']);
 
 corbo.config(function($routeProvider){
@@ -37,8 +37,8 @@ corbo.factory('Cat', function($resource){
     var model = $resource('/api/category/:id', {}, {
             show: { method: 'GET' },
             update: { method: 'POST', params: {id: '@id'} },
-            delete: { 
-                        method: 'PUT', 
+            delete: {
+                        method: 'PUT',
                         params: {
                                     id: '@id',
                                     method: 'DELETE'
@@ -55,12 +55,12 @@ corbo.factory('People', function($resource){
     var model = $resource('/api/people/:id', {}, {
             show: { method: 'GET' },
             update: { method: 'PUT', params: {id: '@id'} },
-            delete: { 
-                        method: 'PUT', 
+            delete: {
+                        method: 'PUT',
                         params: {
                                     id: '@id',
                                     method: 'DELETE'
-                                } 
+                                }
                     }
     });
     return {
@@ -73,9 +73,9 @@ corbo.factory('PeopleCat', function ($q, Cat, People) {
     return {
         all: $q.all([Cat.items.$promise, People.items.$promise])
     };
-}); 
+});
 
-corbo.controller('mainMenuController', ['$scope', '$q', '$filter', 'Events', 'Cat', 'PeopleCat', '$modal', 
+corbo.controller('mainMenuController', ['$scope', '$q', '$filter', 'Events', 'Cat', 'PeopleCat', '$modal',
     function($scope, $q, $filter, Events, Cat, PeopleCat, $modal){
     // Controlls for the 'View Month' Element
     $scope.allMonths = [];
@@ -132,7 +132,7 @@ corbo.controller('mainMenuController', ['$scope', '$q', '$filter', 'Events', 'Ca
     };
 }]);
 
-corbo.controller('viewMembersController', ['$scope', '$modalInstance', 'People', 
+corbo.controller('viewMembersController', ['$scope', '$modalInstance', 'People',
     function($scope, $modalInstance, People){
     $scope.members = People.items;
     $scope.cancel = function(){
@@ -145,8 +145,8 @@ corbo.controller('viewMembersController', ['$scope', '$modalInstance', 'People',
     };
 }]);
 
-corbo.controller('calendarController', ['$scope', '$filter', 'Events', 'People', 
-    function $scope, $filter, Events, People){
+corbo.controller('calendarController', ['$scope', '$filter', 'Events', 'People',
+    function ($scope, $filter, Events, People) {
     var people = People.items;
     $scope.replacements = [];
     $scope.sortPeople = function(category, name){
@@ -224,7 +224,7 @@ corbo.controller('newEventController', ['$rootScope', '$scope', '$q', '$modalIns
         values.push(midValue);
     });
     })();
-    
+
     $rootScope.categories = [];
     var eventObjects = _.pairs(_.object(keys, values));
     eventObjects = _.map(eventObjects, function(val){
@@ -248,9 +248,9 @@ corbo.controller('newEventController', ['$rootScope', '$scope', '$q', '$modalIns
     };
 }]);
 
-corbo.controller('manageCategoriesController', ['$scope', 'Events', '$modalInstance', 'Cat', 
+corbo.controller('manageCategoriesController', ['$scope', 'Events', '$modalInstance', 'Cat',
     function($scope, Events, $modalInstance, Cat){
-    
+
     $scope.categories = Cat.items;
     $scope.category = {};
     $scope.addCategory = function(){
@@ -272,7 +272,7 @@ corbo.controller('manageCategoriesController', ['$scope', 'Events', '$modalInsta
     };
 }]);
 
-corbo.controller('newMemberController', ['$scope', '$modalInstance', 'People', 'Cat', 
+corbo.controller('newMemberController', ['$scope', '$modalInstance', 'People', 'Cat',
     function($scope, $modalInstance, People, Cat){
     $scope.categories = Cat.items;
 
