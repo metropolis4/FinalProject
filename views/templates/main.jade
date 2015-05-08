@@ -1,6 +1,6 @@
 .container
     .navbar.navbar-default
-        .container-fluid(ng-controller="mainMenuController")
+        .container-fluid(ng-controller="MainMenuController")
             .navbar-header
                 button.navbar-toggle(type="button",ng-click="isCollapsed = !isCollapsed")
                     span.icon-bar
@@ -29,6 +29,6 @@
                         a(ng-click="openManageCategories()") Manage Categories   
                             span.nav-icons.glyphicon.glyphicon-edit
 .container
-    .jumbotron.calendar-accordion(ng-controller="calendarController")
+    .jumbotron.calendar-accordion(ng-controller="CalendarController")
         h1.text-center {{newMonth | date: 'MMMM'}}
         calendaraccordion
