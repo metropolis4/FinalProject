@@ -1,18 +1,19 @@
-var express         = require('express'),
-    bodyParser      = require('body-parser'),
-    mongoose        = require('mongoose'),
-    session         = require('express-session'),
-    cookieParser    = require('cookie-parser'),
-    flash           = require('connect-flash'),
-    
-    passport        = require('passport'),
-    passportConfig  = require('./config/passport'),
+var express       = require('express'),
+  bodyParser      = require('body-parser'),
+  mongoose        = require('mongoose'),
+  session         = require('express-session'),
+  cookieParser    = require('cookie-parser'),
+  flash           = require('connect-flash'),
+  
+  passport        = require('passport'),
+  passportConfig  = require('./config/passport'),
+  mongoConfig     = require('./config/mongo'),
 
-    mainController  = require('./controllers/main'),
-    authController  = require('./controllers/authentication'),
-    indexController = require('./controllers/index');
+  mainController  = require('./controllers/main'),
+  authController  = require('./controllers/authentication'),
+  indexController = require('./controllers/index');
 
-mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/helmer');
+mongoose.connect(mongoConfig.stage || mongoConfig.dev);
 
 var app = express();
 app.set('view engine', 'jade');
@@ -63,3 +64,4 @@ var port = process.env.PORT || 5960;
 var server = app.listen(port, function() {
 	console.log('Express server listening on port ' + server.address().port);
 });
+module.exports = app;
