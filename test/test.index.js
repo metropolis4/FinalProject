@@ -3,7 +3,7 @@ var app    = require("../app.js"),
   request  = require('supertest')(app),
   expect   = require('chai').expect;
 
-describe('main controller', function() {
+describe('index controller', function() {
 
   describe('index', function() {
     it('should return a view', function(done) {
@@ -20,7 +20,7 @@ describe('main controller', function() {
   });
 
   describe('login', function() {
-    it('should return a view of the login page', function() {
+    it('should return a view of the login page', function(done) {
       request
         .get('/login')
         .end(function(err, res) {
@@ -34,7 +34,7 @@ describe('main controller', function() {
   });
 
   describe('signUp', function() {
-    it('should return a view of the login page', function() {
+    it('should return a view of the login page', function(done) {
       request
         .get('/signup')
         .end(function(err, res) {

@@ -4,11 +4,12 @@
   "description": "Small Team Organizational Assistant",
   "scripts": {
     "start": "node app.js",
-    "test" : "mocha --reporter nyan"
+    "test": "mocha --reporter nyan"
   },
   "dependencies": {
     "bcrypt": "~0.8.1",
     "body-parser": "^1",
+    "coffee-script": "^1.9.2",
     "connect-flash": "~0.1.1",
     "cookie-parser": "~1.3.4",
     "express": "^4",
