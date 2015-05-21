@@ -1,18 +1,19 @@
-var express = require('express'),
-    bodyParser = require('body-parser'),
-    mongoose = require('mongoose'),
-    session = require('express-session'),
-    cookieParser = require('cookie-parser'),
-    flash = require('connect-flash'),
-    passport = require('passport');
+var express       = require('express'),
+  bodyParser      = require('body-parser'),
+  mongoose        = require('mongoose'),
+  session         = require('express-session'),
+  cookieParser    = require('cookie-parser'),
+  flash           = require('connect-flash'),
+  
+  passport        = require('passport'),
+  passportConfig  = require('./config/passport'),
+  mongoConfig     = require('./config/mongo'),
 
-var passportConfig = require('./config/passport');
+  mainController  = require('./controllers/main'),
+  authController  = require('./controllers/authentication'),
+  indexController = require('./controllers/index');
 
-var mainController = require('./controllers/main'),
-    authenticationController = require('./controllers/authentication'),
-    indexController = require('./controllers/index');
-
-mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/helmer');
+mongoose.connect(mongoConfig.stage || mongoConfig.dev);
 
 var app = express();
 app.set('view engine', 'jade');
@@ -24,24 +25,24 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(flash());
 app.use(session({
-    secret: 'secret',
-    resave: false,
-    saveUninitialized: false
+  secret           : 'secret',
+  resave           : false,
+  saveUninitialized: false
 }));
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.get('/', indexController.index);
 app.get('/login', indexController.login);
-app.post('/auth/login', authenticationController.processLogin);
+app.post('/auth/login', authController.processLogin);
 app.get('/signup', indexController.signUp);
-app.post('/auth/signup', authenticationController.processSignup);
-app.get('/auth/logout', authenticationController.logout);
+app.post('/auth/signup', authController.processSignup);
+app.get('/auth/logout', authController.logout);
 
 app.use(passportConfig.ensureAuthenticated);
 
 app.get('/templates/:templateid', function(req, res){
-    res.render('templates/' + req.params.templateid);
+  res.render('templates/' + req.params.templateid);
 });
 app.get('/main', mainController.main);
 app.get('/api/event', mainController.getEvents);
@@ -63,3 +64,4 @@ var port = process.env.PORT || 5960;
 var server = app.listen(port, function() {
 	console.log('Express server listening on port ' + server.address().port);
 });
+module.exports = app;

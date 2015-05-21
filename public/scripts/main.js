@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 (function(){ 
     var corbo = angular.module('corbo', ['ngResource', 'ngRoute', 'ui.bootstrap']);
 
@@ -297,4 +298,27 @@
             templateUrl: '/templates/calendarAccordion'
         };
     });
+=======
+(function () {
+
+  angular.module('corbo', ['ngResource', 'ngRoute', 'ui.bootstrap'])
+
+    .config(function ($routeProvider) {
+      $routeProvider
+        .when('/', {
+          templateUrl: '/templates/main',
+          resolve    : {
+            peoplecat: function (PeopleCat) { return PeopleCat.all; }
+          }
+        });
+    })
+
+    .directive('calendaraccordion', function () {
+      return {
+        restrict   : 'E',
+        templateUrl: '/templates/calendarAccordion'
+      };
+    });
+
+>>>>>>> 8a39cf9b810728de6415f7e30f2a3a3f8316d834
 })();
