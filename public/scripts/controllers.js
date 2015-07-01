@@ -93,10 +93,10 @@
         var eventToUpdate = Events.model.get({id: event._id}, function () {
           _.map(eventToUpdate.people, function (val) {
             if(val.category === category) {
-              val.name = replacement.name.first;
+              val.name = replacement.name;
             }
           });
-          event.people[index].name = replacement.name.first;
+          event.people[index].name = replacement.name;
           eventToUpdate.$update({id: eventToUpdate._id});
         });
       };

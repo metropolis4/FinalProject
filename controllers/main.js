@@ -21,6 +21,7 @@ var mainController = {
       .pairs()
       .map(function (val) {
         var name = JSON.parse(val[1]);
+        console.log("SERVER: " , name)
         var peopleObj = { name: name, category: val[0]};
         return peopleObj;
       })

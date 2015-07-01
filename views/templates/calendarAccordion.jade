@@ -4,11 +4,11 @@ accordion(close-others="true")
         .container.row.accordion-rows
             .container.col-md-3.center-block.cards(ng-repeat="category in event.people")
                 .container
-                    .modal-header 
+                    .modal-header
                         h3 {{category.category}}
                     .modal-body
                         .container
-                            p.lead {{category.name}}
+                            p.lead {{category.name.first}} {{category.name.last}}
                     .modal-footer
                         .dropdown(dropdown, on-toggle="toggled(open)")
                             button.btn.btn-primary.dropdown-toggle(data-toggle="dropdown", dropdown-toggle, ng-click="sortPeople(category.category, category.name)") find a sub...
@@ -18,7 +18,7 @@ accordion(close-others="true")
                                 .container.sub-cards
                                     ul.list-unstyled
                                         li.replacement-items(ng-repeat="replacement in replacements")
-                                            a.lead(ng-click="replace(replacement, category.category, event, $parent.$index)") {{replacement.name.first}}
+                                            a.lead(ng-click="replace(replacement, category.category, event, $parent.$index)") {{replacement.name.first}} {{replacement.name.last}}
                                             br
                                             a(ng-href="mailto:{{replacement.email}}?subject=Can%20you%20sub?") {{replacement.email}}
                                             br

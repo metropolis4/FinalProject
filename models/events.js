@@ -3,8 +3,11 @@ var mongoose = require('mongoose');
 var eventSchema = mongoose.Schema({
   people: [
     {
-      name    : String,
-      category: String
+      category: String,
+      name    : {
+        first: String,
+        last: String
+      }
     }
   ],
   date   : Date,
