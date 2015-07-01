@@ -39,7 +39,7 @@ app.get('/signup', indexController.signUp);
 app.post('/auth/signup', authController.processSignup);
 app.get('/auth/logout', authController.logout);
 
-// app.use(passportConfig.ensureAuthenticated);
+app.use(passportConfig.ensureAuthenticated);
 
 app.get('/templates/:templateid', function(req, res){
   res.render('templates/' + req.params.templateid);
