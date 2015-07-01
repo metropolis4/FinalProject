@@ -53,7 +53,7 @@ var authenticationController = {
   },
   logout: function (req, res) {
     req.logout();
-    res.redirect('/');
+    res.redirect('/login');
   }
 };
 

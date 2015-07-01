@@ -4,7 +4,7 @@ var express       = require('express'),
   session         = require('express-session'),
   cookieParser    = require('cookie-parser'),
   flash           = require('connect-flash'),
-  
+
   passport        = require('passport'),
   passportConfig  = require('./config/passport'),
   mongoConfig     = require('./config/mongo'),
@@ -39,7 +39,7 @@ app.get('/signup', indexController.signUp);
 app.post('/auth/signup', authController.processSignup);
 app.get('/auth/logout', authController.logout);
 
-app.use(passportConfig.ensureAuthenticated);
+// app.use(passportConfig.ensureAuthenticated);
 
 app.get('/templates/:templateid', function(req, res){
   res.render('templates/' + req.params.templateid);
